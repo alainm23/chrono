@@ -1,0 +1,10 @@
+prefix=@prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libchrono
+Description: A natural language date and time parser library for Vala/GLib applications
+Version: @VERSION@
+Libs: -L${libdir} -lchrono
+Cflags: -I${includedir}/libchrono
+Requires: glib-2.0 gobject-2.0
