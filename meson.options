@@ -1,1 +1,2 @@
 option('tests', type: 'boolean', value: false, description: 'Build tests')
+option('docs', type: 'boolean', value: false, description: 'Build documentation')

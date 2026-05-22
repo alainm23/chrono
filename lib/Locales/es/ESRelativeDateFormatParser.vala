@@ -42,61 +42,57 @@ namespace Chrono {
         }
         
         public ParseResult? parse (string text) {
-            try {
-                MatchInfo match;
-                if (!relative_regex.match (text, 0, out match)) {
-                    return null;
-                }
-                
-                string full_match = match.fetch (0).down ();
-                string? unit_str = null;
-                int amount = 0;
-                
-                // Try to get unit from different capture groups
-                for (int i = 1; i <= 3; i++) {
-                    string? temp = match.fetch (i);
-                    if (temp != null && temp.length > 0) {
-                        unit_str = temp;
-                        break;
-                    }
-                }
-                
-                if (unit_str == null) {
-                    return null;
-                }
-                
-                TimeUnit? time_unit = ESConstants.get_time_unit (unit_str);
-                if (time_unit == null) {
-                    return null;
-                }
-                
-                // Determine direction based on keywords
-                if (full_match.contains ("próximo") || full_match.contains ("proximo") || 
-                    full_match.contains ("próxima") || full_match.contains ("proxima") ||
-                    full_match.contains ("siguiente") || full_match.contains ("que viene")) {
-                    amount = 1;
-                } else if (full_match.contains ("pasado") || full_match.contains ("pasada")) {
-                    amount = -1;
-                } else if (full_match.contains ("este") || full_match.contains ("esta")) {
-                    amount = 0;
-                }
-                
-                var now = new DateTime.now_local ();
-                DateTime date = add_time_unit (now, time_unit, amount);
-                
-                var result = new ParseResult ();
-                result.date = date;
-                
-                int start_pos, end_pos;
-                match.fetch_pos (0, out start_pos, out end_pos);
-                result.start_index = start_pos;
-                result.end_index = end_pos;
-                result.matched_text = match.fetch (0);
-                
-                return result;
-            } catch (Error e) {
+            MatchInfo match;
+            if (!relative_regex.match (text, 0, out match)) {
                 return null;
             }
+            
+            string full_match = match.fetch (0).down ();
+            string? unit_str = null;
+            int amount = 0;
+            
+            // Try to get unit from different capture groups
+            for (int i = 1; i <= 3; i++) {
+                string? temp = match.fetch (i);
+                if (temp != null && temp.length > 0) {
+                    unit_str = temp;
+                    break;
+                }
+            }
+            
+            if (unit_str == null) {
+                return null;
+            }
+            
+            TimeUnit? time_unit = ESConstants.get_time_unit (unit_str);
+            if (time_unit == null) {
+                return null;
+            }
+            
+            // Determine direction based on keywords
+            if (full_match.contains ("próximo") || full_match.contains ("proximo") || 
+                full_match.contains ("próxima") || full_match.contains ("proxima") ||
+                full_match.contains ("siguiente") || full_match.contains ("que viene")) {
+                amount = 1;
+            } else if (full_match.contains ("pasado") || full_match.contains ("pasada")) {
+                amount = -1;
+            } else if (full_match.contains ("este") || full_match.contains ("esta")) {
+                amount = 0;
+            }
+            
+            var now = new DateTime.now_local ();
+            DateTime date = add_time_unit (now, time_unit, amount);
+            
+            var result = new ParseResult ();
+            result.date = date;
+            
+            int start_pos, end_pos;
+            match.fetch_pos (0, out start_pos, out end_pos);
+            result.start_index = start_pos;
+            result.end_index = end_pos;
+            result.matched_text = match.fetch (0);
+            
+            return result;
         }
         
         private DateTime add_time_unit (DateTime date, TimeUnit unit, int amount) {

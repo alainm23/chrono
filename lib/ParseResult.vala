@@ -20,11 +20,23 @@
  */
  
 namespace Chrono {
+    /**
+     * Holds the result of a successful parse operation.
+     */
     public class ParseResult : Object {
+        /** The parsed date and time. */
         public DateTime? date { get; set; }
+
+        /** The parsed recurrence rule, if any. */
         public RecurrenceRule? recurrence { get; set; }
+
+        /** Start index of the matched text in the original string. */
         public int start_index { get; set; }
+
+        /** End index of the matched text in the original string. */
         public int end_index { get; set; }
+
+        /** The substring that was matched. */
         public string matched_text { get; set; }
         
         public ParseResult () {

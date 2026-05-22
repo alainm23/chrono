@@ -11,6 +11,10 @@ gee_dep = dependency('gee-0.8')
 subdir('lib')
 subdir('data')
 
+if get_option('docs')
+  subdir('doc')
+endif
+
 if get_option('tests')
   subdir('tests')
 endif

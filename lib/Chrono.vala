@@ -20,15 +20,38 @@
  */
  
 namespace Chrono {
+    /**
+     * Entry point for natural language date and time parsing.
+     *
+     * {{{
+     * var chrono = new Chrono.Chrono ();
+     * var result = chrono.parse ("tomorrow at 9am");
+     * if (result != null) {
+     *     print (result.date.to_string ());
+     * }
+     * }}}
+     */
     public class Chrono : Object {
         private Parser parser;
         private string language;
-        
+
+        /**
+         * Creates a new Chrono instance.
+         *
+         * @param language BCP 47 language code. Supported: ``en``, ``es``.
+         */
         public Chrono (string language = "en") {
             this.language = language;
             parser = new Parser ();
         }
-        
+
+        /**
+         * Parses a natural language string and returns the first date/time found.
+         *
+         * @param text The input string to parse (e.g. "tomorrow", "next Monday at 3pm").
+         * @param parse_recurrence Whether to also parse recurrence rules (e.g. "every week").
+         * @return A {@link ParseResult} with the matched date, or ``null`` if nothing was found.
+         */
         public ParseResult? parse (string text, bool parse_recurrence = false) {
             return parser.parse (text, language, parse_recurrence);
         }

@@ -40,52 +40,48 @@ namespace Chrono {
         }
         
         public ParseResult? parse (string text) {
-            try {
-                MatchInfo match;
-                if (!relative_regex.match (text, 0, out match)) {
-                    return null;
-                }
-                
-                string modifier = match.fetch (1).down ().replace (" ", "");
-                string unit_str = match.fetch (2);
-                
-                TimeUnit? time_unit = ENConstants.get_time_unit (unit_str);
-                if (time_unit == null) {
-                    return null;
-                }
-                
-                var now = new DateTime.now_local ();
-                DateTime date;
-                
-                switch (modifier) {
-                    case "this":
-                    case "afterthis":
-                        date = now;
-                        break;
-                    case "last":
-                    case "past":
-                        date = add_time_unit (now, time_unit, -1);
-                        break;
-                    case "next":
-                        date = add_time_unit (now, time_unit, 1);
-                        break;
-                    default:
-                        return null;
-                }
-                
-                var result = new ParseResult ();
-                result.date = date;
-                
-                int start_pos, end_pos;
-                match.fetch_pos (0, out start_pos, out end_pos);
-                result.start_index = start_pos;
-                result.end_index = end_pos;
-                result.matched_text = match.fetch (0);
-                
-                return result;
-            } catch (Error e) {
+            MatchInfo match;
+            if (!relative_regex.match (text, 0, out match)) {
                 return null;
             }
+            
+            string modifier = match.fetch (1).down ().replace (" ", "");
+            string unit_str = match.fetch (2);
+            
+            TimeUnit? time_unit = ENConstants.get_time_unit (unit_str);
+            if (time_unit == null) {
+                return null;
+            }
+            
+            var now = new DateTime.now_local ();
+            DateTime date;
+            
+            switch (modifier) {
+                case "this":
+                case "afterthis":
+                    date = now;
+                    break;
+                case "last":
+                case "past":
+                    date = add_time_unit (now, time_unit, -1);
+                    break;
+                case "next":
+                    date = add_time_unit (now, time_unit, 1);
+                    break;
+                default:
+                    return null;
+            }
+            
+            var result = new ParseResult ();
+            result.date = date;
+            
+            int start_pos, end_pos;
+            match.fetch_pos (0, out start_pos, out end_pos);
+            result.start_index = start_pos;
+            result.end_index = end_pos;
+            result.matched_text = match.fetch (0);
+            
+            return result;
         }
         
         private DateTime add_time_unit (DateTime date, TimeUnit unit, int amount) {

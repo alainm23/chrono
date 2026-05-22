@@ -42,39 +42,35 @@ namespace Chrono {
         }
         
         public ParseResult? parse (string text) {
-            try {
-                MatchInfo match;
-                if (!slash_regex.match (text, 0, out match)) {
-                    return null;
-                }
-                
-                int day = int.parse (match.fetch (1));
-                int month = int.parse (match.fetch (2));
-                
-                var now = new DateTime.now_local ();
-                int year = now.get_year ();
-                
-                string? year_str = match.fetch (3);
-                if (year_str != null && year_str.length > 0) {
-                    year = int.parse (year_str);
-                    if (year < 100) {
-                        year += 2000;
-                    }
-                }
-                
-                var result = new ParseResult ();
-                result.date = new DateTime.local (year, month, day, 0, 0, 0);
-                
-                int start_pos, end_pos;
-                match.fetch_pos (0, out start_pos, out end_pos);
-                result.start_index = start_pos;
-                result.end_index = end_pos;
-                result.matched_text = match.fetch (0);
-                
-                return result;
-            } catch (Error e) {
+            MatchInfo match;
+            if (!slash_regex.match (text, 0, out match)) {
                 return null;
             }
+            
+            int day = int.parse (match.fetch (1));
+            int month = int.parse (match.fetch (2));
+            
+            var now = new DateTime.now_local ();
+            int year = now.get_year ();
+            
+            string? year_str = match.fetch (3);
+            if (year_str != null && year_str.length > 0) {
+                year = int.parse (year_str);
+                if (year < 100) {
+                    year += 2000;
+                }
+            }
+            
+            var result = new ParseResult ();
+            result.date = new DateTime.local (year, month, day, 0, 0, 0);
+            
+            int start_pos, end_pos;
+            match.fetch_pos (0, out start_pos, out end_pos);
+            result.start_index = start_pos;
+            result.end_index = end_pos;
+            result.matched_text = match.fetch (0);
+            
+            return result;
         }
     }
 }
