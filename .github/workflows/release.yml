@@ -26,7 +26,7 @@ jobs:
         run: |
           python3 << 'PYTHON_SCRIPT' >> $GITHUB_OUTPUT
           import xml.etree.ElementTree as ET
-          tree = ET.parse('data/libchrono.metainfo.xml.in')
+          tree = ET.parse('data/chrono.metainfo.xml.in')
           root = tree.getroot()
           version = '${{ steps.version.outputs.version }}'
           print('changelog<<EOF')
@@ -47,7 +47,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: libchrono ${{ steps.version.outputs.version }}
+          name: chrono ${{ steps.version.outputs.version }}
           body: |
             ${{ steps.changelog.outputs.changelog }}
         env:

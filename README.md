@@ -1,4 +1,4 @@
-# libchrono
+# chrono
 
 A natural language date and time parser library for Vala/GLib applications.
 
@@ -14,10 +14,10 @@ Originally developed as part of [Planify](https://github.com/alainm23/planify).
 ## Usage
 
 ```vala
-var chrono = new Services.Chrono ();
+var chrono = new Chrono.Core ();
 var result = chrono.parse ("tomorrow at 9am");
 if (result != null) {
-    print ("Parsed date: %s\n", result.start.to_string ());
+    print ("Parsed date: %s\n", result.date.to_string ());
 }
 ```
 

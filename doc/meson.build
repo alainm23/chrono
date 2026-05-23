@@ -12,9 +12,9 @@ custom_target(
         '--package-version=' + meson.project_version(),
         '--force',
         '--use-svg-images',
-        '-o', join_paths(meson.current_build_dir(), 'libchrono-vala'),
+        '-o', join_paths(meson.current_build_dir(), 'chrono-vala'),
     ],
     build_by_default: true,
-    output: 'libchrono-vala',
+    output: 'chrono-vala',
     depends: libchrono_lib,
 )
