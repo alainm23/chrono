@@ -1,5 +1,5 @@
 void main () {
-    var chrono = new Services.Chrono ();
+    var chrono = new Chrono.Core ();
 
     // Test basic date parsing
     var result = chrono.parse ("tomorrow");
