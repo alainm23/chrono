@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="addon">
-  <id>io.github.alainm23.libchrono</id>
+  <id>io.github.alainm23.chrono</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
-  <name>libchrono</name>
+  <name>chrono</name>
   <summary>A natural language date and time parser library for Vala/GLib applications</summary>
   <description>
     <p>
-      libchrono parses natural language date and time strings such as "tomorrow",
+      chrono parses natural language date and time strings such as "tomorrow",
       "next Monday", or "in 3 days" into GLib.DateTime objects. It supports
       recurrence rules and multiple languages.
     </p>
   </description>
 
-  <url type="homepage">https://github.com/alainm23/libchrono</url>
-  <url type="bugtracker">https://github.com/alainm23/libchrono/issues</url>
+  <url type="homepage">https://github.com/alainm23/chrono</url>
+  <url type="bugtracker">https://github.com/alainm23/chrono/issues</url>
 
   <developer id="io.github.alainm23">
     <name>Alain M.</name>

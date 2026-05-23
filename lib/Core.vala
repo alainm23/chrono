@@ -24,14 +24,14 @@ namespace Chrono {
      * Entry point for natural language date and time parsing.
      *
      * {{{
-     * var chrono = new Chrono.Chrono ();
+     * var chrono = new Chrono.Core ();
      * var result = chrono.parse ("tomorrow at 9am");
      * if (result != null) {
      *     print (result.date.to_string ());
      * }
      * }}}
      */
-    public class Chrono : Object {
+    public class Core : Object {
         private Parser parser;
         private string language;
 
@@ -40,7 +40,7 @@ namespace Chrono {
          *
          * @param language BCP 47 language code. Supported: ``en``, ``es``.
          */
-        public Chrono (string language = "en") {
+        public Core (string language = "en") {
             this.language = language;
             parser = new Parser ();
         }

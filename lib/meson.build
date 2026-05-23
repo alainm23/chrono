@@ -1,5 +1,5 @@
 libchrono_sources = files(
-  'Chrono.vala',
+  'Core.vala',
   'LanguageParser.vala',
   'Parser.vala',
   'ParseResult.vala',
@@ -32,8 +32,8 @@ libchrono_lib = shared_library(
   'chrono',
   libchrono_sources,
   dependencies: libchrono_deps,
-  vala_header: 'libchrono.h',
-  vala_vapi: 'libchrono.vapi',
+  vala_header: 'chrono.h',
+  vala_vapi: 'chrono.vapi',
   install: true,
   install_dir: [true, true, true],
 )
@@ -47,8 +47,8 @@ libchrono_dep = declare_dependency(
 pkg = import('pkgconfig')
 pkg.generate(
   libchrono_lib,
-  name: 'libchrono',
+  name: 'chrono',
   description: 'A natural language date and time parser library for Vala/GLib applications',
   version: meson.project_version(),
-  filebase: 'libchrono',
+  filebase: 'chrono',
 )

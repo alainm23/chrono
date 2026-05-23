@@ -17,3 +17,22 @@ jobs:
         with:
           dir: lib
           conf: .vala-lint.conf
+
+  test:
+    name: "Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y valac meson ninja-build libglib2.0-dev libgee-0.8-dev
+
+      - name: Build
+        run: |
+          meson setup build -Dtests=true
+          cd build && ninja
+
+      - name: Run tests
+        run: cd build && meson test -v
