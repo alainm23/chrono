@@ -1,4 +1,4 @@
-# chrono
+# Chrono
 
 A natural language date and time parser library for Vala/GLib applications.
 
